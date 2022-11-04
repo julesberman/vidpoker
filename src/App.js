@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Player from "./Player";
+import React, { useState } from "react";
+import io from "socket.io-client";
 
 function App() {
+  const [data, setData] = useState({});
+
+  let socket = io("http://localhost:8888", { transports: ["websocket"] });
+
+  socket.on("serialdata", (data) => {
+    setData(data);
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="player-cont">
+        <Player name={"Tom"} />
+        <Player name={"Aaron"} />
+        <Player name={"Bingo"} />
+        <Player name={"Rick Dolo"} />
+      </div>
     </div>
   );
 }
