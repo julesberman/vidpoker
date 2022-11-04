@@ -1,16 +1,28 @@
-import "./App.css";
-import Player from "./Player";
 import React, { useState } from "react";
 import io from "socket.io-client";
+import "./App.css";
+import Player from "./Player";
 
-function App() {
-  const [data, setData] = useState({});
+// function processData(data) {
+
+//   player = getPlayer(data)
+//   cards = getCard(data)
+
+//   return player, cards
+
+// }
+
+
+function App(props) {
+  const [serialdata, setSerialData] = useState({});
+
 
   let socket = io("http://localhost:8888", { transports: ["websocket"] });
 
-  socket.on("serialdata", (data) => {
-    setData(data);
+  socket.on("serialdata", (serialdata) => {
+    setSerialData(serialdata);
   });
+
 
   return (
     <div className="App">

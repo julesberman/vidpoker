@@ -33,6 +33,6 @@ export function generateStringFromRank(rank) {
 export function genRandomCard() {
   let rank = Math.floor(Math.random() * 10) + 1;
   let suit = Object.values(SUITS)[Math.floor(Math.random() * 3)];
-  let suitstr = generateStringFromSuit(suit);
-  return `${rank} ${suitstr}`;
+  suit = generateStringFromSuit(suit);
+  return { rank, suit }
 }
